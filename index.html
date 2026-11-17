@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sistema de Fechamento por Letras - 8 Jogos</title>
+  <title>Bolão Amigos BJ - Fechamento 8 Jogos</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -203,15 +203,14 @@
 </head>
 <body>
   <div class="container">
-    <h1>Fechamento Condicionado por Letras — 8 Jogos</h1>
+    <h1>Bolão Amigos BJ — Fechamento por Letras (8 Jogos)</h1>
     <p class="subtitle">Classifique as colunas por potencial (A, B, C, D, S), aplique filtros de cota e some sub-blocos para fechar seu bolão.</p>
 
     <div class="grid-layout">
-      <!-- COLUNA ESQUERDA: GRADE DOS 8 JOGOS -->
       <div class="panel">
         <h2>
           <span>Grade de Jogos (1 a 8)</span>
-          <button class="btn-outline" onclick="preencherExemplo()" style="padding: 5px 10px; font-size: 0.8rem;">Carregar Exemplo</button>
+          <button type="button" class="btn-outline" onclick="preencherExemplo()" style="padding: 5px 10px; font-size: 0.8rem;">Carregar Exemplo</button>
         </h2>
         <table>
           <thead>
@@ -229,13 +228,12 @@
         </table>
 
         <div class="btn-group">
-          <button class="btn-outline" onclick="limparGrade()">Limpar Grade</button>
-          <button class="btn-primary" onclick="gerarBlocoAtual()">Gerar Bloco Atual</button>
-          <button class="btn-accent" onclick="adicionarAoBolao()">+ Adicionar Bloco ao Bolão Final</button>
+          <button type="button" class="btn-outline" onclick="limparGrade()">Limpar Grade</button>
+          <button type="button" class="btn-primary" onclick="gerarBlocoAtual()">Gerar Bloco Atual</button>
+          <button type="button" class="btn-accent" onclick="adicionarAoBolao()">+ Adicionar Bloco ao Bolão Final</button>
         </div>
       </div>
 
-      <!-- COLUNA DIREITA: FILTROS E ORÇAMENTO -->
       <div>
         <div class="panel">
           <h2>Filtros de Potencial (Cotas por Cartão)</h2>
@@ -303,18 +301,17 @@
           </div>
 
           <div class="btn-group">
-            <button class="btn-danger" onclick="zerarBolao()" style="padding: 7px 12px; font-size: 0.82rem;">Zerar Bolão</button>
+            <button type="button" class="btn-danger" onclick="zerarBolao()" style="padding: 7px 12px; font-size: 0.82rem;">Zerar Bolão</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SAÍDA DAS CARTELAS -->
     <div class="panel">
       <h2>
         <span>Cartelas Geradas (<span id="contador-saida">0</span>)</span>
         <div style="display: flex; gap: 8px;">
-          <button class="btn-outline" onclick="copiarCartelas()" style="padding: 6px 12px; font-size: 0.85rem;">Copiar Texto</button>
-          <button class="btn-warning" onclick="baixarCSV()" style="padding: 6px 12px; font-size: 0.85rem;">Baixar Excel (CSV)</button>
+          <button type="button" class="btn-outline" onclick="copiarCartelas()" style="padding: 6px 12px; font-size: 0.85rem;">Copiar Texto</button>
+          <button type="button" class="btn-warning" onclick="baixarCSV()" style="padding: 6px 12px; font-size: 0.85rem;">Baixar Excel (CSV)</button>
         </div>
       </h2>
