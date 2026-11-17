@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Fechamento por Letras - 8 Jogos</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #10b981;
+      --primary-hover: #059669;
+      --accent: #3b82f6;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .container { max-width: 1150px; margin: 0 auto; }
+    h1 { margin: 0 0 5px 0; font-size: 1.6rem; color: var(--primary); }
+    p.subtitle { margin: 0 0 20px 0; color: var(--muted); font-size: 0.95rem; }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-layout { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .panel h2 {
+      margin-top: 0;
+      font-size: 1.15rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px 6px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; }
+
+    input[type="text"], input[type="number"], select {
+      background: #0f172a;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 0.9rem;
+    }
+
+    input[type="text"] { width: 100%; }
+    input[type="number"] { width: 65px; text-align: center; }
+
+    select.letra-select {
+      font-weight: bold;
+      width: 58px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .letra-A { background: #166534 !important; color: #fff; }
+    .letra-B { background: #1d4ed8 !important; color: #fff; }
+    .letra-C { background: #b45309 !important; color: #fff; }
+    .letra-D { background: #991b1b !important; color: #fff; }
+    .letra-S { background: #000000 !important; color: #facc15; border-color: #facc15; }
+    .letra-OFF { background: #334155 !important; color: #94a3b8; }
+
+    .badge-tipo {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      background: #334155;
+    }
+
+    .filtros-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .filtro-item {
+      background: #0f172a;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .btn-primary { background: var(--primary); color: #052e16; }
+    .btn-primary:hover { background: var(--primary-hover); color: #fff; }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: #2563eb; }
+    .btn-warning { background: var(--warning); color: #000; }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { background: #334155; }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .stat-box {
+      background: #0f172a;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-box span { display: block; font-size: 0.78rem; color: var(--muted); }
+    .stat-box strong { font-size: 1.25rem; color: var(--primary); }
+
+    .blocos-lista {
+      max-height: 180px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    .bloco-card {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 240px;
+      background: #0f172a;
+      color: #38bdf8;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fechamento Condicionado por Letras — 8 Jogos</h1>
+    <p class="subtitle">Classifique as colunas por potencial (A, B, C, D, S), aplique filtros de cota e some sub-blocos para fechar seu bolão.</p>
+
+    <div class="grid-layout">
+      <!-- COLUNA ESQUERDA: GRADE DOS 8 JOGOS -->
+      <div class="panel">
+        <h2>
+          <span>Grade de Jogos (1 a 8)</span>
+          <button class="btn-outline" onclick="preencherExemplo()" style="padding: 5px 10px; font-size: 0.8rem;">Carregar Exemplo</button>
+        </h2>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 35px;">#</th>
+              <th>Mandante</th>
+              <th style="width: 65px;">Col 1</th>
+              <th style="width: 65px;">Meio (X)</th>
+              <th style="width: 65px;">Col 2</th>
+              <th>Visitante</th>
+              <th style="width: 55px;">Tipo</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-jogos"></tbody>
+        </table>
+
+        <div class="btn-group">
+          <button class="btn-outline" onclick="limparGrade()">Limpar Grade</button>
+          <button class="btn-primary" onclick="gerarBlocoAtual()">Gerar Bloco Atual</button>
+          <button class="btn-accent" onclick="adicionarAoBolao()">+ Adicionar Bloco ao Bolão Final</button>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA: FILTROS E ORÇAMENTO -->
+      <div>
+        <div class="panel">
+          <h2>Filtros de Potencial (Cotas por Cartão)</h2>
+          <div class="filtros-grid">
+            <div class="filtro-item">
+              <span>Letra <strong>A</strong> (Min - Max)</span>
+              <div>
+                <input type="number" id="minA" value="0" min="0" max="8" />
+                <input type="number" id="maxA" value="8" min="0" max="8" />
+              </div>
+            </div>
+            <div class="filtro-item">
+              <span>Letra <strong>B</strong> (Min - Max)</span>
+              <div>
+                <input type="number" id="minB" value="0" min="0" max="8" />
+                <input type="number" id="maxB" value="8" min="0" max="8" />
+              </div>
+            </div>
+            <div class="filtro-item">
+              <span>Letra <strong>C</strong> (Min - Max)</span>
+              <div>
+                <input type="number" id="minC" value="0" min="0" max="8" />
+                <input type="number" id="maxC" value="8" min="0" max="8" />
+              </div>
+            </div>
+            <div class="filtro-item">
+              <span>Letra <strong>D</strong> (Min - Max)</span>
+              <div>
+                <input type="number" id="minD" value="0" min="0" max="8" />
+                <input type="number" id="maxD" value="8" min="0" max="8" />
+              </div>
+            </div>
+          </div>
+
+          <div class="filtro-item" style="margin-bottom: 10px;">
+            <span>Valor por Cartela (R$)</span>
+            <input type="number" id="valorCota" value="10" min="1" step="0.5" onchange="atualizarResumo()" />
+          </div>
+
+          <div class="filtro-item">
+            <span>Limitar máximo de cartelas neste bloco (0 = sem limite)</span>
+            <input type="number" id="limiteCartelas" value="0" min="0" max="6561" />
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Sub-Blocos Salvos no Bolão</h2>
+          <div class="stats-bar">
+            <div class="stat-box">
+              <span>Cartelas no Bolão</span>
+              <strong id="totalCartelas">0</strong>
+            </div>
+            <div class="stat-box">
+              <span>Investimento Total</span>
+              <strong id="totalValor">R$ 0,00</strong>
+            </div>
+            <div class="stat-box">
+              <span>Blocos Somados</span>
+              <strong id="totalBlocos">0</strong>
+            </div>
+          </div>
+
+          <div class="blocos-lista" id="lista-blocos">
+            <p style="color: var(--muted); font-size: 0.85rem; text-align: center;">Nenhum bloco adicionado ainda.</p>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn-danger" onclick="zerarBolao()" style="padding: 7px 12px; font-size: 0.82rem;">Zerar Bolão</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAÍDA DAS CARTELAS -->
+    <div class="panel">
+      <h2>
+        <span>Cartelas Geradas (<span id="contador-saida">0</span>)</span>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-outline" onclick="copiarCartelas()" style="padding: 6px 12px; font-size: 0.85rem;">Copiar Texto</button>
+          <button class="btn-warning" onclick="baixarCSV()" style="padding: 6px 12px; font-size: 0.85rem;">Baixar Excel (CSV)</button>
+        </div>
+      </h2>
