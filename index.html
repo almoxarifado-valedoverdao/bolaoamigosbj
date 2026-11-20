@@ -3,261 +3,302 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bolão Profissional (8, 10, 14 Jogos)</title>
+<title>Bolão Profissional (Corrigido)</title>
 <style>
   :root { --bg: #0f172a; --painel: #1e293b; --borda: #334155; --texto: #f8fafc; --verde: #10b981; --azul: #3b82f6; --verm: #ef4444; }
   * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-  body { margin: 0; padding: 15px; background: var(--bg); color: var(--texto); }
-  .wrap { max-width: 1250px; margin: 0 auto; }
+  body { margin: 0; padding: 20px; background: var(--bg); color: var(--texto); }
+  .wrap { max-width: 1200px; margin: 0 auto; }
   
-  /* Cabeçalho */
-  .header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 10px; }
-  h1 { margin: 0; font-size: 1.4rem; color: var(--verde); }
+  /* Topo */
+  .header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 15px; }
+  h1 { margin: 0; font-size: 1.5rem; color: var(--verde); text-transform: uppercase; letter-spacing: 1px; }
+  
+  /* Abas */
   .tabs { display: flex; gap: 5px; background: var(--painel); padding: 5px; border-radius: 8px; border: 1px solid var(--borda); }
-  .tab { background: transparent; border: none; color: #94a3b8; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+  .tab { background: transparent; border: none; color: #94a3b8; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 0.9rem; }
   .tab:hover { color: #fff; background: var(--borda); }
-  .tab.active { background: var(--verde); color: #064e3b; }
+  .tab.active { background: var(--verde); color: #064e3b; box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
 
-  /* Layout Grid */
-  .grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+  /* Grid Principal */
+  .grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
   @media(max-width: 900px) { .grid { grid-template-columns: 1fr; } }
 
-  /* Paineis */
-  .box { background: var(--painel); border: 1px solid var(--borda); border-radius: 8px; padding: 15px; margin-bottom: 15px; }
+  /* Caixas */
+  .box { background: var(--painel); border: 1px solid var(--borda); border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3); }
   .box-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--borda); padding-bottom: 10px; margin-bottom: 15px; }
-  .box-head h2 { margin: 0; font-size: 1.1rem; }
+  .box-head h2 { margin: 0; font-size: 1.1rem; color: #e2e8f0; }
 
   /* Tabela */
   table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 5px; text-align: center; border-bottom: 1px solid var(--borda); font-size: 0.85rem; }
-  input[type="text"], input[type="number"], select { background: var(--bg); border: 1px solid #475569; color: #fff; padding: 5px; border-radius: 4px; }
-  input[type="text"] { width: 100%; }
-  input[type="number"] { width: 55px; text-align: center; font-weight: bold; }
-  select { font-weight: bold; cursor: pointer; }
-
-  /* Cores */
-  .l-A { background: #166534 !important; color: #fff; }
-  .l-B { background: #1d4ed8 !important; color: #fff; }
-  .l-C { background: #b45309 !important; color: #fff; }
-  .l-D { background: #991b1b !important; color: #fff; }
+  th { background: #0f172a; padding: 8px; font-size: 0.85rem; color: #94a3b8; border-bottom: 2px solid var(--borda); }
+  td { padding: 6px 4px; text-align: center; border-bottom: 1px solid var(--borda); }
+  
+  /* Inputs */
+  input, select { background: #0f172a; border: 1px solid #475569; color: #fff; padding: 6px; border-radius: 4px; font-size: 0.9rem; }
+  input[type="text"] { width: 100%; padding-left: 8px; }
+  input[type="number"] { width: 50px; text-align: center; font-weight: bold; }
+  select { font-weight: bold; cursor: pointer; width: 50px; text-align: center; }
+  
+  /* Cores das Letras */
+  .l-A { background: #166534 !important; color: #fff; border-color: #166534; }
+  .l-B { background: #1d4ed8 !important; color: #fff; border-color: #1d4ed8; }
+  .l-C { background: #b45309 !important; color: #fff; border-color: #b45309; }
+  .l-D { background: #991b1b !important; color: #fff; border-color: #991b1b; }
   .l-S { background: #000 !important; color: #facc15 !important; border: 1px solid #facc15; }
 
-  /* Botões */
-  .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
-  button { border: 0; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; color: #fff; font-size: 0.9rem; }
-  .btn-gray { background: var(--borda); }
-  .btn-green { background: var(--verde); color: #022c22; }
-  .btn-blue { background: var(--azul); }
-  .btn-red { background: var(--verm); }
-  .btn-yellow { background: #f59e0b; color: #000; }
-  button:hover { filter: brightness(1.1); }
+  /* Filtros */
+  .filter-group { margin-bottom: 20px; border: 1px solid var(--borda); border-radius: 6px; padding: 10px; background: rgba(15, 23, 42, 0.5); }
+  .filter-title { font-size: 0.85rem; font-weight: bold; color: var(--azul); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .filter-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.9rem; }
+  .filter-row label { color: #cbd5e1; }
 
-  /* Seções de Filtros */
-  .filter-section { margin-bottom: 20px; }
-  .filter-title { font-size: 0.9rem; font-weight: bold; color: #94a3b8; margin-bottom: 8px; border-bottom: 1px solid #334155; padding-bottom: 4px; }
-  .filter-row { display: flex; justify-content: space-between; align-items: center; background: var(--bg); padding: 6px 10px; border-radius: 6px; margin-bottom: 6px; border: 1px solid var(--borda); font-size: 0.9rem; }
+  /* Botões */
+  .btns { display: flex; gap: 10px; margin-top: 15px; }
+  button { border: 0; padding: 10px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9rem; transition: 0.2s; color: white; }
+  .btn-green { background: var(--verde); color: #022c22; } .btn-green:hover { background: #34d399; }
+  .btn-blue { background: var(--azul); } .btn-blue:hover { background: #60a5fa; }
+  .btn-red { background: var(--verm); } .btn-red:hover { background: #f87171; }
+  .btn-gray { background: var(--borda); } .btn-gray:hover { background: #475569; }
+  .btn-yellow { background: #f59e0b; color: #000; } .btn-yellow:hover { background: #fbbf24; }
+
+  /* Resumo e Output */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+  .stat-box { background: #0f172a; padding: 10px; border-radius: 6px; text-align: center; border: 1px solid var(--borda); }
+  .stat-box small { display: block; color: #94a3b8; font-size: 0.75rem; margin-bottom: 4px; }
+  .stat-box strong { font-size: 1.2rem; color: var(--verde); }
   
-  /* Stats e Output */
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-  .stat-card { background: var(--bg); padding: 10px; border-radius: 6px; text-align: center; border: 1px solid var(--borda); }
-  .stat-card span { display: block; font-size: 0.75rem; color: #94a3b8; }
-  .stat-card strong { font-size: 1.1rem; color: var(--verde); }
-  .bloco-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg); padding: 6px; margin-bottom: 5px; border-radius: 4px; font-size: 0.85rem; }
-  textarea { width: 100%; height: 150px; background: var(--bg); color: #38bdf8; border: 1px solid var(--borda); border-radius: 6px; padding: 10px; font-family: monospace; resize: vertical; }
+  .bloco-list { max-height: 150px; overflow-y: auto; margin-bottom: 10px; }
+  .bloco-item { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 8px; margin-bottom: 5px; border-radius: 4px; font-size: 0.85rem; border: 1px solid var(--borda); }
+
+  textarea { width: 100%; height: 180px; background: #0f172a; color: #38bdf8; border: 1px solid var(--borda); border-radius: 6px; padding: 12px; font-family: 'Consolas', monospace; resize: vertical; line-height: 1.4; }
 </style>
 </head>
 <body>
 
 <div class="wrap">
   <div class="header">
-    <h1 id="appTitle">Bolão Profissional (8 Jogos)</h1>
+    <h1 id="appTitle">Bolão Profissional</h1>
     <div class="tabs">
-      <button class="tab active" id="tab8" onclick="mudarModulo(8)">8 Jogos</button>
-      <button class="tab" id="tab10" onclick="mudarModulo(10)">10 Jogos</button>
-      <button class="tab" id="tab14" onclick="mudarModulo(14)">14 Jogos</button>
+      <button class="tab active" id="tab8" onclick="trocarModulo(8)">8 Jogos</button>
+      <button class="tab" id="tab10" onclick="trocarModulo(10)">10 Jogos</button>
+      <button class="tab" id="tab14" onclick="trocarModulo(14)">14 Jogos</button>
     </div>
   </div>
 
   <div class="grid">
-    
-    <!-- ESQUERDA: GRADE -->
+    <!-- COLUNA DA ESQUERDA: GRADE -->
     <div class="box">
       <div class="box-head">
-        <h2 id="gradeTitle">Grade de Palpites</h2>
-        <button class="btn-gray" onclick="carregarExemplo()">Carregar Exemplo</button>
+        <h2 id="gradeTitle">Grade de Palpites (8 Jogos)</h2>
+        <button class="btn-gray" style="padding: 6px 12px; font-size: 0.8rem;" onclick="carregarExemplo()">Exemplo</button>
       </div>
       
       <table>
         <thead>
-          <tr><th>#</th><th>Mandante</th><th>1</th><th>X</th><th>2</th><th>Visitante</th><th>Tipo</th></tr>
+          <tr>
+            <th width="5%">#</th>
+            <th width="30%">Mandante</th>
+            <th width="10%">1</th>
+            <th width="10%">X</th>
+            <th width="10%">2</th>
+            <th width="30%">Visitante</th>
+            <th width="5%">Tipo</th>
+          </tr>
         </thead>
-        <tbody id="tabelaJogos"></tbody>
+        <tbody id="tabelaJogos">
+          <!-- Linhas geradas via JS -->
+        </tbody>
       </table>
 
       <div class="btns">
         <button class="btn-gray" onclick="limparGrade()">Limpar</button>
-        <button class="btn-green" onclick="gerarCombinacoes()">Gerar Combinações</button>
-        <button class="btn-blue" onclick="adicionarAoBolao()">+ Salvar Bloco</button>
+        <button class="btn-green" onclick="processarCombinacoes()">Gerar Combinações</button>
+        <button class="btn-blue" onclick="salvarBloco()">+ Salvar Bloco</button>
       </div>
     </div>
 
-    <!-- DIREITA: FILTROS E RESUMO -->
+    <!-- COLUNA DA DIREITA: FILTROS E RESUMO -->
     <div>
       <div class="box">
         <div class="box-head"><h2>Filtros Condicionais</h2></div>
-
-        <!-- Filtro 1: Quantidade de Colunas -->
-        <div class="filter-section">
-          <div class="filter-title">1. DAS COLUNAS (Quantidade Mín/Máx)</div>
-          <div class="filter-row">
-            <span>Coluna 1 (Mandante)</span>
-            <div><input type="number" id="minC1" value="0"> a <input type="number" id="maxC1" value="14"></div>
-          </div>
-          <div class="filter-row">
-            <span>Coluna X (Empate)</span>
-            <div><input type="number" id="minCX" value="0"> a <input type="number" id="maxCX" value="14"></div>
-          </div>
-          <div class="filter-row">
-            <span>Coluna 2 (Visitante)</span>
-            <div><input type="number" id="minC2" value="0"> a <input type="number" id="maxC2" value="14"></div>
-          </div>
-        </div>
-
-        <!-- Filtro 2: Letras / Chaves -->
-        <div class="filter-section">
-          <div class="filter-title">2. DAS CHAVES (Letras Mín/Máx)</div>
-          <div class="filter-row">
-            <span>Letra A (Favoritos)</span>
-            <div><input type="number" id="minA" value="0"> a <input type="number" id="maxA" value="14"></div>
-          </div>
-          <div class="filter-row">
-            <span>Letra B (Surpresas)</span>
-            <div><input type="number" id="minB" value="0"> a <input type="number" id="maxB" value="14"></div>
-          </div>
-          <div class="filter-row">
-            <span>Letra C (Zebras)</span>
-            <div><input type="number" id="minC" value="0"> a <input type="number" id="maxC" value="14"></div>
-          </div>
-          <div class="filter-row">
-            <span>Letra D (Ousados)</span>
-            <div><input type="number" id="minD" value="0"> a <input type="number" id="maxD" value="14"></div>
-          </div>
-        </div>
         
-        <div class="filter-row" style="margin-top:10px; border-color: #475569;">
-          <span>Custo por Aposta (R$)</span>
-          <input type="number" id="valorAposta" value="1.50" step="0.50" onchange="atualizarResumo()">
+        <!-- Filtro de Colunas -->
+        <div class="filter-group">
+          <div class="filter-title">1. Das Colunas (Qtd 1, X, 2)</div>
+          <div class="filter-row">
+            <label>Coluna 1 (Mandante)</label>
+            <div>Min <input type="number" id="minC1" value="0"> Máx <input type="number" id="maxC1" value="14"></div>
+          </div>
+          <div class="filter-row">
+            <label>Coluna X (Empate)</label>
+            <div>Min <input type="number" id="minCX" value="0"> Máx <input type="number" id="maxCX" value="14"></div>
+          </div>
+          <div class="filter-row">
+            <label>Coluna 2 (Visitante)</label>
+            <div>Min <input type="number" id="minC2" value="0"> Máx <input type="number" id="maxC2" value="14"></div>
+          </div>
+        </div>
+
+        <!-- Filtro de Letras -->
+        <div class="filter-group">
+          <div class="filter-title">2. Das Chaves (Letras A, B, C)</div>
+          <div class="filter-row">
+            <label>Letra A (Favoritos)</label>
+            <div>Min <input type="number" id="minA" value="0"> Máx <input type="number" id="maxA" value="14"></div>
+          </div>
+          <div class="filter-row">
+            <label>Letra B (Surpresas)</label>
+            <div>Min <input type="number" id="minB" value="0"> Máx <input type="number" id="maxB" value="14"></div>
+          </div>
+          <div class="filter-row">
+            <label>Letra C (Zebras)</label>
+            <div>Min <input type="number" id="minC" value="0"> Máx <input type="number" id="maxC" value="14"></div>
+          </div>
+        </div>
+
+        <div class="filter-row" style="margin-top:10px; padding-top:10px; border-top:1px solid #334155;">
+          <label>Custo Aposta (R$)</label>
+          <input type="number" id="custoAposta" value="1.50" step="0.50" onchange="atualizarResumoUI()">
         </div>
         <div class="filter-row">
-          <span>Limitar Qtd. Gerada</span>
-          <input type="number" id="limiteCartelas" value="0" placeholder="0=Livre">
+          <label>Limite de Cartelas</label>
+          <input type="number" id="limiteSeguranca" value="0" placeholder="0 = Livre">
         </div>
       </div>
 
       <div class="box">
-        <div class="box-head"><h2>Resumo Geral</h2></div>
-        <div class="stats-grid">
-          <div class="stat-card"><span>Cartelas Únicas</span><strong id="lblQtd">0</strong></div>
-          <div class="stat-card"><span>Custo Total</span><strong id="lblValor">R$ 0,00</strong></div>
-          <div class="stat-card"><span>Blocos</span><strong id="lblBlocos">0</strong></div>
+        <div class="box-head"><h2>Resumo do Bolão</h2></div>
+        <div class="stats">
+          <div class="stat-box"><small>Cartelas</small><strong id="resQtd">0</strong></div>
+          <div class="stat-box"><small>Total R$</small><strong id="resValor">0,00</strong></div>
+          <div class="stat-box"><small>Blocos</small><strong id="resBlocos">0</strong></div>
         </div>
-        
-        <div id="listaBlocos" style="max-height: 120px; overflow-y: auto;"></div>
-        <button class="btn-red" style="width:100%; margin-top:10px; font-size:0.8rem;" onclick="zerarTudo()">Limpar Tudo</button>
+        <div id="listaBlocos" class="bloco-list"></div>
+        <button class="btn-red" style="width:100%; font-size:0.8rem; padding:6px;" onclick="zerarTudo()">Zerar Tudo</button>
       </div>
     </div>
   </div>
 
   <div class="box">
     <div class="box-head">
-      <h2>Saída de Dados (<span id="lblQtdOut">0</span> geradas agora)</h2>
-      <div class="btns" style="margin:0;">
-        <button class="btn-gray" onclick="copiarTexto()">Copiar</button>
-        <button class="btn-yellow" onclick="baixarCSV()">Baixar Excel</button>
+      <h2>Saída de Dados (<span id="outQtd">0</span> cartelas neste bloco)</h2>
+      <div class="btns" style="margin:0">
+        <button class="btn-gray" onclick="copiarOutput()">Copiar</button>
+        <button class="btn-yellow" onclick="baixarCSV()">Baixar CSV</button>
       </div>
     </div>
-    <textarea id="output" readonly placeholder="Os jogos gerados aparecerão aqui..."></textarea>
+    <textarea id="outputArea" readonly placeholder="Gere as combinações para ver os cartões aqui..."></textarea>
   </div>
+
 </div>
 
 <script>
-// --- Configuração e Estado ---
-let moduloAtual = 8;
-const MAX_ITERACOES_SEGURANCA = 200000;
+// --- GLOBAL VARIABLES ---
+let modAtual = 8;
 
-// Armazena dados de cada aba separadamente
-const store = {
-  8: { grade:, blocosSalvos:, filtros: null, atual: },
-  10: { grade:, blocosSalvos:, filtros: null, atual: },
-  14: { grade:, blocosSalvos:, filtros: null, atual: }
+// Estrutura de dados corrigida para evitar erro de sintaxe
+const db = {
+  8:  { grade: [], filtros: null, blocos: [], atual: [] },
+  10: { grade: [], filtros: null, blocos: [], atual: [] },
+  14: { grade: [], filtros: null, blocos: [], atual: [] }
 };
 
-window.onload = () => { mudarModulo(8); };
+// --- INICIALIZAÇÃO ---
+window.onload = function() {
+  trocarModulo(8);
+};
 
-// --- Navegação ---
-function mudarModulo(n) {
-  salvarEstado(moduloAtual);
-  moduloAtual = n;
+// --- NAVEGAÇÃO E RENDERIZAÇÃO ---
+function trocarModulo(n) {
+  // 1. Salvar estado anterior
+  salvarEstado(modAtual);
   
-  // UI Updates
-  document.getElementById('appTitle').innerText = `Bolão Profissional (${n} Jogos)`;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(`tab${n}`).classList.add('active');
+  // 2. Mudar variável
+  modAtual = n;
   
-  // Ajusta Inputs Máximos
-  const inputsMax = ['maxA','maxB','maxC','maxD','maxC1','maxCX','maxC2'];
+  // 3. Atualizar UI (Abas e Títulos)
+  document.getElementById('appTitle').innerText = `BOLÃO PROFISSIONAL (${n} JOGOS)`;
+  document.getElementById('gradeTitle').innerText = `Grade de Palpites (${n} Jogos)`;
+  
+  ['8','10','14'].forEach(id => {
+    const btn = document.getElementById('tab' + id);
+    if (id == n) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+
+  // 4. Renderizar Tabela
+  renderizarTabela(n);
+
+  // 5. Ajustar Máximos dos Filtros
+  const inputsMax = ['maxC1','maxCX','maxC2','maxA','maxB','maxC'];
   inputsMax.forEach(id => {
     const el = document.getElementById(id);
     el.max = n;
-    if(parseInt(el.value) > n) el.value = n; // corrige se estiver acima
+    // Se o valor atual for maior que o novo módulo, reduz para o módulo
+    if(parseInt(el.value) > n) el.value = n;
+    // Se estava zerado ou padrão, joga pro max
+    if(parseInt(el.value) === 0) el.value = n;
   });
 
-  renderizarGrade(n);
+  // 6. Restaurar dados do novo módulo
   restaurarEstado(n);
 }
 
-function renderizarGrade(linhas) {
+function renderizarTabela(linhas) {
   const tbody = document.getElementById('tabelaJogos');
-  tbody.innerHTML = '';
+  tbody.innerHTML = ''; // Limpa tudo
+  
   for(let i=1; i<=linhas; i++) {
+    // Cria linha HTML
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><b>${i < 10 ? '0'+i : i}</b></td>
-      <td><input type="text" id="time1_${i}" placeholder="Mandante"></td>
-      <td><select id="sel_${i}_0" onchange="mudarCor(this, ${i})"><option>-</option><option>A</option><option>B</option><option>C</option><option>D</option><option>S</option></select></td>
-      <td><select id="sel_${i}_1" onchange="mudarCor(this, ${i})"><option>-</option><option>A</option><option>B</option><option>C</option><option>D</option><option>S</option></select></td>
-      <td><select id="sel_${i}_2" onchange="mudarCor(this, ${i})"><option>-</option><option>A</option><option>B</option><option>C</option><option>D</option><option>S</option></select></td>
-      <td><input type="text" id="time2_${i}" placeholder="Visitante"></td>
-      <td><span class="badge" id="badge_${i}" style="font-size:0.75rem; color:#64748b; font-weight:bold;">-</span></td>
+      <td><input type="text" id="t1_${i}" placeholder="Casa"></td>
+      <td><select id="s_${i}_0" onchange="atualizarCor(this, ${i})"><option>-</option><option>A</option><option>B</option><option>C</option><option>D</option><option>S</option></select></td>
+      <td><select id="s_${i}_1" onchange="atualizarCor(this, ${i})"><option>-</option><option>A</option><option>B</option><option>C</option><option>D</option><option>S</option></select></td>
+      <td><select id="s_${i}_2" onchange="atualizarCor(this, ${i})"><option>-</option><option>A</option><option>B</option><option>C</option><option>D</option><option>S</option></select></td>
+      <td><input type="text" id="t2_${i}" placeholder="Fora"></td>
+      <td><span id="badge_${i}" style="font-size:0.75rem; font-weight:bold; color:#64748b">-</span></td>
     `;
     tbody.appendChild(tr);
   }
 }
 
-function mudarCor(select, linha) {
-  select.className = select.value === '-' ? '' : 'l-' + select.value;
-  let marcados = 0;
-  for(let c=0; c<3; c++) if(document.getElementById(`sel_${linha}_${c}`).value !== '-') marcados++;
-  
+function atualizarCor(el, linha) {
+  // Remove classes antigas
+  el.className = '';
+  if(el.value !== '-') el.classList.add('l-' + el.value);
+
+  // Calcula tipo (Seco/Duplo/Triplo)
+  let count = 0;
+  for(let c=0; c<3; c++) {
+    if(document.getElementById(`s_${linha}_${c}`).value !== '-') count++;
+  }
   const badge = document.getElementById(`badge_${linha}`);
-  badge.innerText = marcados === 0 ? '-' : marcados === 1 ? 'Seco' : marcados === 2 ? 'Duplo' : 'Triplo';
-  badge.style.color = marcados > 1 ? '#facc15' : '#64748b';
+  badge.innerText = count === 0 ? '-' : count === 1 ? 'Seco' : count === 2 ? 'Duplo' : 'Triplo';
+  badge.style.color = count > 1 ? '#facc15' : '#64748b';
 }
 
-// --- Estado ---
+// --- ESTADO (SALVAR/RESTAURAR) ---
 function salvarEstado(mod) {
-  const s = store[mod];
-  s.grade =;
+  const s = db[mod];
+  s.grade = [];
+  
+  // Salva Grade
   for(let i=1; i<=mod; i++) {
-    if(!document.getElementById(`time1_${i}`)) break;
+    const t1 = document.getElementById(`t1_${i}`);
+    if(!t1) break; // Segurança
     s.grade.push({
-      t1: document.getElementById(`time1_${i}`).value,
-      t2: document.getElementById(`time2_${i}`).value,
-      s0: document.getElementById(`sel_${i}_0`).value,
-      s1: document.getElementById(`sel_${i}_1`).value,
-      s2: document.getElementById(`sel_${i}_2`).value
+      t1: t1.value,
+      t2: document.getElementById(`t2_${i}`).value,
+      s0: document.getElementById(`s_${i}_0`).value,
+      s1: document.getElementById(`s_${i}_1`).value,
+      s2: document.getElementById(`s_${i}_2`).value
     });
   }
+
+  // Salva Filtros
   s.filtros = {
     minC1: document.getElementById('minC1').value, maxC1: document.getElementById('maxC1').value,
     minCX: document.getElementById('minCX').value, maxCX: document.getElementById('maxCX').value,
@@ -265,70 +306,81 @@ function salvarEstado(mod) {
     minA: document.getElementById('minA').value, maxA: document.getElementById('maxA').value,
     minB: document.getElementById('minB').value, maxB: document.getElementById('maxB').value,
     minC: document.getElementById('minC').value, maxC: document.getElementById('maxC').value,
-    minD: document.getElementById('minD').value, maxD: document.getElementById('maxD').value,
-    preco: document.getElementById('valorAposta').value,
-    lim: document.getElementById('limiteCartelas').value
+    preco: document.getElementById('custoAposta').value,
+    lim: document.getElementById('limiteSeguranca').value
   };
 }
 
 function restaurarEstado(mod) {
-  const s = store[mod];
+  const s = db[mod];
   
-  // Grade
-  if(s.grade && s.grade.length) {
-    s.grade.forEach((d, idx) => {
-      let i = idx+1;
-      document.getElementById(`time1_${i}`).value = d.t1;
-      document.getElementById(`time2_${i}`).value = d.t2;
-      const s0=document.getElementById(`sel_${i}_0`); s0.value=d.s0; mudarCor(s0,i);
-      const s1=document.getElementById(`sel_${i}_1`); s1.value=d.s1; mudarCor(s1,i);
-      const s2=document.getElementById(`sel_${i}_2`); s2.value=d.s2; mudarCor(s2,i);
+  // Restaura Grade
+  if(s.grade && s.grade.length > 0) {
+    s.grade.forEach((dados, idx) => {
+      let i = idx + 1;
+      const elT1 = document.getElementById(`t1_${i}`);
+      if(elT1) {
+        elT1.value = dados.t1;
+        document.getElementById(`t2_${i}`).value = dados.t2;
+        
+        const sel0 = document.getElementById(`s_${i}_0`); sel0.value = dados.s0; atualizarCor(sel0, i);
+        const sel1 = document.getElementById(`s_${i}_1`); sel1.value = dados.s1; atualizarCor(sel1, i);
+        const sel2 = document.getElementById(`s_${i}_2`); sel2.value = dados.s2; atualizarCor(sel2, i);
+      }
     });
   }
 
-  // Filtros
+  // Restaura Filtros
   if(s.filtros) {
     document.getElementById('minC1').value = s.filtros.minC1; document.getElementById('maxC1').value = s.filtros.maxC1;
     document.getElementById('minCX').value = s.filtros.minCX; document.getElementById('maxCX').value = s.filtros.maxCX;
     document.getElementById('minC2').value = s.filtros.minC2; document.getElementById('maxC2').value = s.filtros.maxC2;
+    
     document.getElementById('minA').value = s.filtros.minA; document.getElementById('maxA').value = s.filtros.maxA;
     document.getElementById('minB').value = s.filtros.minB; document.getElementById('maxB').value = s.filtros.maxB;
     document.getElementById('minC').value = s.filtros.minC; document.getElementById('maxC').value = s.filtros.maxC;
-    document.getElementById('minD').value = s.filtros.minD; document.getElementById('maxD').value = s.filtros.maxD;
-    document.getElementById('valorAposta').value = s.filtros.preco;
-    document.getElementById('limiteCartelas').value = s.filtros.lim;
+
+    document.getElementById('custoAposta').value = s.filtros.preco;
+    document.getElementById('limiteSeguranca').value = s.filtros.lim;
   } else {
-    // Resetar Filtros
-    ['C1','CX','C2','A','B','C','D'].forEach(k => {
-      document.getElementById('min'+k).value = 0;
-      document.getElementById('max'+k).value = mod;
-    });
+    // Reset inputs se não houver dados salvos
+    const defaults = ['minC1','minCX','minC2','minA','minB','minC'];
+    defaults.forEach(id => document.getElementById(id).value = 0);
+    const maxs = ['maxC1','maxCX','maxC2','maxA','maxB','maxC'];
+    maxs.forEach(id => document.getElementById(id).value = mod);
   }
-  
-  atualizarResumo();
-  exibirSaida(s.atual);
+
+  // Atualiza Output
+  mostrarOutput(s.atual);
+  atualizarResumoUI();
 }
 
-// --- Motor de Combinação Avançado ---
-function gerarCombinacoes() {
-  // 1. Ler Matriz
-  const matriz =;
-  const colunasRef = ['1', 'X', '2'];
+// --- LÓGICA DE COMBINAÇÃO (CORE) ---
+function processarCombinacoes() {
+  // 1. Ler a Grade
+  const matrizJogos = [];
+  const colunasPossiveis = ['1', 'X', '2'];
   let totalTeorico = 1;
-  
-  for(let i=1; i<=moduloAtual; i++) {
-    const opcoes =;
+
+  for(let i=1; i<=modAtual; i++) {
+    const opcoes = [];
     for(let c=0; c<3; c++) {
-      const val = document.getElementById(`sel_${i}_${c}`).value;
-      if(val !== '-') opcoes.push({ col: colunasRef[c], letra: val });
+      const val = document.getElementById(`s_${i}_${c}`).value;
+      if(val !== '-') {
+        opcoes.push({ col: colunasPossiveis[c], letra: val });
+      }
     }
-    if(!opcoes.length) { alert(`Jogo ${i} está vazio!`); return; }
-    matriz.push(opcoes);
+    if(opcoes.length === 0) {
+      alert(`O jogo ${i} não tem nenhum palpite marcado.`);
+      return;
+    }
+    matrizJogos.push(opcoes);
     totalTeorico *= opcoes.length;
   }
 
-  if(totalTeorico > 5000000) {
-    if(!confirm(`Atenção: Combinação gera teóricos ${totalTeorico.toLocaleString()} cartões. Pode demorar. Continuar?`)) return;
+  // Aviso de Segurança
+  if(totalTeorico > 3000000) {
+    if(!confirm(`Atenção: A grade marcada gera ${totalTeorico.toLocaleString()} combinações brutas. Pode demorar alguns segundos. Continuar?`)) return;
   }
 
   // 2. Ler Filtros
@@ -336,177 +388,234 @@ function gerarCombinacoes() {
     minC1: +document.getElementById('minC1').value, maxC1: +document.getElementById('maxC1').value,
     minCX: +document.getElementById('minCX').value, maxCX: +document.getElementById('maxCX').value,
     minC2: +document.getElementById('minC2').value, maxC2: +document.getElementById('maxC2').value,
+    
     minA: +document.getElementById('minA').value, maxA: +document.getElementById('maxA').value,
     minB: +document.getElementById('minB').value, maxB: +document.getElementById('maxB').value,
     minC: +document.getElementById('minC').value, maxC: +document.getElementById('maxC').value,
-    minD: +document.getElementById('minD').value, maxD: +document.getElementById('maxD').value,
-    lim: +document.getElementById('limiteCartelas').value
+    
+    limite: +document.getElementById('limiteSeguranca').value
   };
 
-  const resultados =;
-  let it = 0;
+  // 3. Algoritmo Recursivo Otimizado (Backtracking)
+  const resultados = [];
   let interromper = false;
+  let iteracoes = 0;
 
-  // 3. Backtracking com Poda
-  function combinar(idx, linha, c1, cx, c2, cA, cB, cC, cD) {
+  function combinar(index, linhaAtual, counts) {
     if(interromper) return;
-    it++;
     
-    // Safety Break (apenas se não houver limite definido e for muito grande)
-    if(f.lim === 0 && it > MAX_ITERACOES_SEGURANCA * 10) { 
-      // Se quiser ser muito rígido, pare aqui. Vamos deixar correr um pouco mais.
+    // Proteção contra travamento infinito
+    iteracoes++;
+    if(f.limite === 0 && iteracoes > 5000000) {
+       // Apenas um hard stop para não congelar o browser pra sempre em casos extremos
+       // interromper = true; 
     }
 
-    // --- PODA DE EXCESSO ---
-    if(c1 > f.maxC1 || cx > f.maxCX || c2 > f.maxC2) return;
-    if(cA > f.maxA || cB > f.maxB || cC > f.maxC || cD > f.maxD) return;
+    // PODA (Pruning): Verifica se já estourou algum MÁXIMO
+    if(counts.c1 > f.maxC1 || counts.cx > f.maxCX || counts.c2 > f.maxC2) return;
+    if(counts.cA > f.maxA || counts.cB > f.maxB || counts.cC > f.maxC) return;
 
-    // --- PODA DE INSUFICIÊNCIA (Projection Pruning) ---
-    const resta = moduloAtual - idx;
-    if(c1 + resta < f.minC1 || cx + resta < f.minCX || c2 + resta < f.minC2) return;
-    if(cA + resta < f.minA || cB + resta < f.minB || cC + resta < f.minC || cD + resta < f.minD) return;
+    // PODA POR PROJEÇÃO: Verifica se ainda É POSSÍVEL atingir o MÍNIMO
+    const restantes = modAtual - index;
+    if(counts.c1 + restantes < f.minC1) return;
+    if(counts.cx + restantes < f.minCX) return;
+    if(counts.c2 + restantes < f.minC2) return;
+    
+    if(counts.cA + restantes < f.minA) return;
+    if(counts.cB + restantes < f.minB) return;
+    if(counts.cC + restantes < f.minC) return;
 
-    // --- BASE CASE ---
-    if(idx === moduloAtual) {
-      resultados.push([...linha]);
-      if(f.lim > 0 && resultados.length >= f.lim) interromper = true;
+    // BASE: Chegou ao fim
+    if(index === modAtual) {
+      resultados.push([...linhaAtual]);
+      if(f.limite > 0 && resultados.length >= f.limite) interromper = true;
       return;
     }
 
-    // --- RECURSÃO ---
-    const jogo = matriz[idx];
-    for(let op of jogo) {
-      linha.push(op.col);
+    // RECURSÃO: Itera sobre as opções do jogo atual
+    const opcoesJogo = matrizJogos[index];
+    for(let op of opcoesJogo) {
+      linhaAtual.push(op.col);
       
-      // Atualiza contadores
-      let n1=c1, nx=cx, n2=c2;
-      if(op.col === '1') n1++; else if(op.col === 'X') nx++; else n2++;
+      // Clona contadores para passar adiante
+      const newCounts = { ...counts };
+      
+      // Atualiza Coluna
+      if(op.col === '1') newCounts.c1++;
+      else if(op.col === 'X') newCounts.cx++;
+      else newCounts.c2++;
+      
+      // Atualiza Letra
+      if(op.letra === 'A') newCounts.cA++;
+      else if(op.letra === 'B') newCounts.cB++;
+      else if(op.letra === 'C') newCounts.cC++;
 
-      let nA=cA, nB=cB, nC=cC, nD=cD;
-      if(op.letra === 'A') nA++; 
-      else if(op.letra === 'B') nB++; 
-      else if(op.letra === 'C') nC++; 
-      else if(op.letra === 'D') nD++;
-
-      combinar(idx+1, linha, n1, nx, n2, nA, nB, nC, nD);
-      linha.pop();
+      combinar(index + 1, linhaAtual, newCounts);
+      
+      linhaAtual.pop(); // Remove para tentar a próxima opção (backtrack)
       if(interromper) break;
     }
   }
 
-  combinar(0,, 0,0,0, 0,0,0,0);
+  // Inicia a recursão
+  combinar(0, [], { c1:0, cx:0, c2:0, cA:0, cB:0, cC:0 });
 
-  if(resultados.length === 0) alert("Nenhuma combinação atendeu aos filtros.");
-  store[moduloAtual].atual = resultados;
-  exibirSaida(resultados);
-}
-
-// --- Output e Download ---
-function exibirSaida(lista) {
-  const area = document.getElementById('output');
-  const lbl = document.getElementById('lblQtdOut');
-  lbl.innerText = lista ? lista.length : 0;
-  
-  if(!lista || !lista.length) { area.value = ""; return; }
-  
-  area.value = lista.map((j, i) => `Cartão ${String(i+1).padStart(4,'0')}: ${j.join(" ")}`).join("\n");
-}
-
-function adicionarAoBolao() {
-  const at = store[moduloAtual].atual;
-  if(!at || !at.length) { alert("Gere cartões primeiro!"); return; }
-  store[moduloAtual].blocosSalvos.push(JSON.parse(JSON.stringify(at)));
-  atualizarResumo();
-}
-
-function zerarTudo() {
-  if(confirm("Apagar todos os blocos salvos?")) {
-    store[moduloAtual].blocosSalvos =;
-    atualizarResumo();
+  // Finalização
+  if(resultados.length === 0) {
+    alert("Nenhuma combinação encontrada com esses filtros!");
   }
-}
-
-function removerBloco(i) {
-  store[moduloAtual].blocosSalvos.splice(i,1);
-  atualizarResumo();
-}
-
-function atualizarResumo() {
-  const mapa = new Map();
-  store[moduloAtual].blocosSalvos.flat().forEach(j => mapa.set(j.join(""), j));
-  const unicas = Array.from(mapa.values());
   
-  const preco = parseFloat(document.getElementById('valorAposta').value) || 0;
-  
-  document.getElementById('lblQtd').innerText = unicas.length;
-  document.getElementById('lblValor').innerText = (unicas.length * preco).toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
-  document.getElementById('lblBlocos').innerText = store[moduloAtual].blocosSalvos.length;
-
-  const div = document.getElementById('listaBlocos');
-  div.innerHTML = store[moduloAtual].blocosSalvos.map((b,i) => `
-    <div class="bloco-item">
-      <span>Bloco #${i+1} (${b.length} jogos)</span>
-      <button class="btn-red" style="padding:2px 5px;" onclick="removerBloco(${i})">X</button>
-    </div>
-  `).join('');
+  db[modAtual].atual = resultados;
+  mostrarOutput(resultados);
 }
 
-// --- Exemplo e CSV ---
+// --- FUNÇÕES DE INTERFACE ---
+function mostrarOutput(lista) {
+  const area = document.getElementById('outputArea');
+  const count = document.getElementById('outQtd');
+  
+  count.innerText = lista.length;
+  
+  if(lista.length === 0) {
+    area.value = "";
+    return;
+  }
+  
+  // Formata o texto
+  const texto = lista.map((jogo, i) => {
+    return `Cartão ${String(i+1).padStart(4, '0')}: ` + jogo.join("  ");
+  }).join("\n");
+  
+  area.value = texto;
+}
+
 function carregarExemplo() {
   limparGrade();
-  for(let i=1; i<=moduloAtual; i++) {
-    document.getElementById(`time1_${i}`).value = `Time A${i}`;
-    document.getElementById(`time2_${i}`).value = `Time B${i}`;
-    // Triplo Padrão: 1=A, X=B, 2=C
-    const s0=document.getElementById(`sel_${i}_0`); s0.value='A'; mudarCor(s0,i);
-    const s1=document.getElementById(`sel_${i}_1`); s1.value='B'; mudarCor(s1,i);
-    const s2=document.getElementById(`sel_${i}_2`); s2.value='C'; mudarCor(s2,i);
+  for(let i=1; i<=modAtual; i++) {
+    document.getElementById(`t1_${i}`).value = `Time A${i}`;
+    document.getElementById(`t2_${i}`).value = `Time B${i}`;
+    
+    // Padrão: 1=A, X=B, 2=C (Triplo)
+    const s0 = document.getElementById(`s_${i}_0`); s0.value = 'A'; atualizarCor(s0, i);
+    const s1 = document.getElementById(`s_${i}_1`); s1.value = 'B'; atualizarCor(s1, i);
+    const s2 = document.getElementById(`s_${i}_2`); s2.value = 'C'; atualizarCor(s2, i);
   }
-  // Exemplo de Filtro
-  document.getElementById('minC1').value = Math.floor(moduloAtual * 0.4); // Ex: Min 4 mandantes
+  // Exemplo de filtro suave
+  document.getElementById('minC1').value = Math.floor(modAtual * 0.4); 
 }
 
 function limparGrade() {
-  for(let i=1; i<=moduloAtual; i++) {
-    document.getElementById(`time1_${i}`).value="";
-    document.getElementById(`time2_${i}`).value="";
+  for(let i=1; i<=modAtual; i++) {
+    document.getElementById(`t1_${i}`).value = "";
+    document.getElementById(`t2_${i}`).value = "";
     for(let c=0; c<3; c++) {
-      const s = document.getElementById(`sel_${i}_${c}`); s.value='-'; mudarCor(s,i);
+      const s = document.getElementById(`s_${i}_${c}`);
+      s.value = '-';
+      atualizarCor(s, i);
     }
   }
-  store[moduloAtual].atual =;
-  exibirSaida();
+  db[modAtual].atual = [];
+  mostrarOutput([]);
 }
 
-function copiarTexto() {
-  const t = document.getElementById('output');
-  if(!t.value) return;
-  t.select();
+function salvarBloco() {
+  const atual = db[modAtual].atual;
+  if(atual.length === 0) {
+    alert("Gere as combinações primeiro!");
+    return;
+  }
+  // Clona o array para salvar
+  db[modAtual].blocos.push(JSON.parse(JSON.stringify(atual)));
+  atualizarResumoUI();
+}
+
+function atualizarResumoUI() {
+  const s = db[modAtual];
+  const listaBlocos = document.getElementById('listaBlocos');
+  listaBlocos.innerHTML = '';
+  
+  // Consolida jogos únicos de todos os blocos
+  const setUnicos = new Set();
+  s.blocos.forEach(bloco => {
+    bloco.forEach(jogo => setUnicos.add(jogo.join("")));
+  });
+  
+  const qtdUnica = setUnicos.size;
+  const preco = parseFloat(document.getElementById('custoAposta').value) || 0;
+  
+  document.getElementById('resQtd').innerText = qtdUnica;
+  document.getElementById('resValor').innerText = (qtdUnica * preco).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+  document.getElementById('resBlocos').innerText = s.blocos.length;
+  
+  // Renderiza lista visual dos blocos
+  s.blocos.forEach((bloco, idx) => {
+    const div = document.createElement('div');
+    div.className = 'bloco-item';
+    div.innerHTML = `
+      <span>Bloco #${idx+1} (${bloco.length} jogos)</span>
+      <button class="btn-red" style="padding:2px 8px; font-size:0.7rem;" onclick="removerBloco(${idx})">X</button>
+    `;
+    listaBlocos.appendChild(div);
+  });
+}
+
+function removerBloco(idx) {
+  db[modAtual].blocos.splice(idx, 1);
+  atualizarResumoUI();
+}
+
+function zerarTudo() {
+  if(confirm("Tem certeza que deseja apagar todos os blocos salvos deste módulo?")) {
+    db[modAtual].blocos = [];
+    atualizarResumoUI();
+  }
+}
+
+function copiarOutput() {
+  const area = document.getElementById('outputArea');
+  if(!area.value) return;
+  area.select();
   document.execCommand('copy');
-  alert("Copiado!");
+  alert("Copiado para a área de transferência!");
 }
 
 function baixarCSV() {
-  let final =;
-  if(store[moduloAtual].blocosSalvos.length) {
-    const mapa = new Map();
-    store[moduloAtual].blocosSalvos.flat().forEach(j => mapa.set(j.join(""), j));
-    final = Array.from(mapa.values());
+  // Verifica se tem blocos salvos, senão usa o atual
+  let dadosParaBaixar = [];
+  const s = db[modAtual];
+  
+  if(s.blocos.length > 0) {
+    // Consolida únicos
+    const mapUnicos = new Map();
+    s.blocos.forEach(b => b.forEach(j => mapUnicos.set(j.join(""), j)));
+    dadosParaBaixar = Array.from(mapUnicos.values());
   } else {
-    final = store[moduloAtual].atual;
+    dadosParaBaixar = s.atual;
   }
   
-  if(!final.length) { alert("Nada para baixar"); return; }
+  if(dadosParaBaixar.length === 0) {
+    alert("Não há dados para baixar.");
+    return;
+  }
   
-  let csv = "Cartao;";
-  for(let i=1; i<=moduloAtual; i++) csv += `J${i};`;
-  csv = csv.slice(0,-1) + "\n";
-  csv += final.map((l,i) => `${i+1};${l.join(";")}`).join("\n");
+  // Gera CSV
+  let csvContent = "data:text/csv;charset=utf-8,";
+  csvContent += "Cartao;";
+  // Header J1;J2...
+  for(let i=1; i<=modAtual; i++) csvContent += `J${i};`;
+  csvContent += "\n";
   
+  dadosParaBaixar.forEach((row, index) => {
+    csvContent += `${index+1};${row.join(";")}\n`;
+  });
+  
+  const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
-  link.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
-  link.download = `Bolao_${moduloAtual}Jogos.csv`;
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", `Bolao_${modAtual}Jogos.csv`);
+  document.body.appendChild(link);
   link.click();
+  document.body.removeChild(link);
 }
 </script>
 </body>
